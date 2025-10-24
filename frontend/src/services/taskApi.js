@@ -1,4 +1,24 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+// Автоматическое определение URL API в зависимости от окружения
+const getApiBaseUrl = () => {
+  // Если задана переменная окружения, используем её
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  
+  // Автоматическое определение по текущему домену
+  const hostname = window.location.hostname;
+  
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8000/api';
+  } else if (hostname === 'yadash.ru') {
+    return 'https://yadash.ru/api';
+  }
+  
+  // Fallback для других доменов
+  return `${window.location.protocol}//${hostname}/api`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 class TaskApiService {
   constructor() {
