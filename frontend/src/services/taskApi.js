@@ -11,7 +11,7 @@ const getApiBaseUrl = () => {
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
     return 'http://localhost:8000/api';
   } else if (hostname === 'yadash.ru') {
-    return 'https://yadash.ru/api';
+    return 'http://yadash.ru:8000/api';
   }
   
   // Fallback для других доменов
